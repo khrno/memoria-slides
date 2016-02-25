@@ -1,0 +1,226 @@
+\titlepageframe
+
+\begin{tframe}{Introducción}
+	\begin{adv}		\item<1-> Fuerte \highlightbf{crecimiento} de generadores de información.
+		\item<1-> \highlightbf{Facilidad} de acceso a los datos.
+		\item<1-> Generación de \highlightbf{comunidades} en torno a tópicos.	\end{adv}
+	\begin{disadv}
+		\item<2-> Capacidad \highlightbf{limitada} de procesamiento.
+		\item<2-> Búsquedas \highlightbf{ineficientes} de datos.
+		\item<2-> \highlightbf{Desinformación} producto de resultados errados.
+	\end{disadv}
+	\pause
+\end{tframe}
+
+\begin{frame}[c]{Introducción}
+	\begin{block}{Problema de Exploración}
+		¿Cuál data es \highlightbf{relevante} para las necesidades requeridas?
+	\end{block}\pause
+	\begin{block}{Problema de Explotación}
+		¿Cómo utilizar esa información \highlightbf{eficientemente}?	
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]{Problema}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.5\textwidth}
+			\centering
+    		\includegraphics<1>[width=0.5\textwidth]{images/document-icon.png}
+  		\end{column}
+  		\begin{column}{0.45\textwidth}
+  			\begin{block}{Con \textbf{1} documento$\dots$}
+				Ningún problema señalado ocurre.
+  			\end{block}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\input{partials/9-docs-frame}
+\input{partials/25-docs-frame}
+\input{partials/infinite-docs-frame}
+
+\begin{tframe}{Problema}
+	Con infinitos documentos$\ldots$
+	\begin{disadv}
+		\item ¿Cómo puedo detectar los documentos relevantes a mis necesidades? (\emph{Information Retrieval}).
+		\item ¿De qué habla esta gran colección de documentos? (\emph{Natural Language Processing}).
+		\item Detección de \emph{milestones} dentro de la colección.
+		\item Navegación a través de los contenidos de la colección y no a través de los documentos que la componen (\emph{Linked Data}).
+		\item Generar una estructura que sea capaz de almacenar estos documentos de forma lógica y eficiente (\emph{Information Retrieval}).
+		\item Automatizar la tarea de mantener la colección de documentos vigente.
+	\end{disadv}
+\end{tframe}
+
+\begin{frame}[c]{Solución}
+	\begin{block}{Procesamiento de la información}
+		\begin{itemize}
+			\item La colección documental utilizada es la base de datos bibliográfica \highlightbf{DBLP}.
+			\item Procesar enormes colecciones documentales a través de técnicas de \emph{Information Retrieval} como lo es \emph{Formal Concept Analysis} y dentro del ámbito de \emph{Topic Modeling} se utilizará la técnica \emph{Latent Dirichlet Allocation}.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]{Solución}
+	\begin{block}{Resumen Interactivo}
+		Generar una visualización que permita
+		\begin{itemize}
+			\item Navegar a través de los distintos ``conceptos formales''.
+			\item Analizar la distribución de ``tópicos emergentes''.		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]{Marco Teórico - \emph{DBLP}}
+	\centering
+   	\includegraphics<1>[width=0.5\textwidth]{images/dblp-logo.png}
+	\begin{itemize}
+		\item Plataforma Web alojada en Alemania que contiene artículos científicos relacionados con ciencias de la computación.
+		\item En los años 80's fue una base de datos pequeñas relacionada a través de programación lógica.
+		\item Contiene artículos de las revistas \emph{VLDB}, \emph{IEEE}, \emph{ACM}, además de distintas conferencias. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Marco Teórico - \emph{FCA}}
+	\begin{itemize}
+		\item Método de análisis de datos.
+		\item Analiza la información que describe la relación entre un particular conjunto de objetos y atributos.
+		\item Produce dos salidas
+		\begin{itemize}
+			\item \emph{Concept Lattice}
+			\item Implicaciones de atributos
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\input{partials/fca-example-frames}
+
+\begin{frame}[c]{Marco Teórico - \emph{FCA}}
+	\centering
+	\includegraphics<1>[width=0.5\textwidth]{images/first-lattice.png}
+\end{frame}
+
+\begin{tframe}{Marco Teórico - \emph{FCA}}
+	\begin{block}{Soporte Mínimo}
+		El \highlightbf{\emph{support}} de un concepto formal dado por $\langle A,B \rangle$, donde $A \subseteq X$ y $B \subseteq Y$ está definido por:
+ 		\begin{equation*}
+			\text{\emph{supp}}(\langle A,B \rangle) = \frac{|A|}{|X|}
+		\end{equation*}
+	\end{block}
+	\begin{block}{\emph{Frequent Concept}}
+		Dado un umbral $\text{\emph{minsupp}} \in [0,1]$, entonces el concepto $\langle A,B \rangle$ es llamado \emph{Frequent Concept} si y sólo si $\text{\emph{supp}}(\langle A,B \rangle) \ge \text{\emph{minsupp}}$.
+	\end{block}
+\end{tframe}
+
+\begin{frame}[c]{Marco Teórico - \emph{FCA}}
+	\begin{block}{Iceberg Lattice}
+		 Un \highlightbf{\emph{Iceberg Lattice}} es el conjunto de todos los \emph{Frequent Concepts} dado un \emph{minsupp}
+	\end{block}	
+\end{frame}
+
+\begin{frame}[c]{Marco Teórico - \emph{LDA}}
+	\begin{itemize}
+		\item Modelo perteneciente al área \emph{Topic Modeling}
+		\item Busca descubrir tópicos a partir de una gran colección de documentos.
+		\item \highlightbf{LDA} asume que:
+		\begin{itemize}
+			\item Un documento $D$ habla sobre un conjunto limitado de \highlightbf{Tópicos}.
+			\item Un \emph{tópico} se compone a través de un \highlightbf{vocabulario fijo}.
+		\end{itemize}
+		\item LDA es un proceso generativo que utiliza técnicas de \highlightbf{Inferencia Estadística} para detectar los tópicos de una gran cantidad de datos.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Marco Teórico - \emph{LDA}}
+	\centering
+	\includegraphics<1>[width=1\textwidth]{images/lda-process.png}
+\end{frame}
+
+
+\begin{tframe}{Marco Teórico - \emph{D3.js}}
+	\includegraphics<1>[width=1\textwidth]{images/D3.js-Logo.png}
+	\begin{itemize}
+		\item Librería \emph{Open Source} de \emph{Javascript}
+		\item Ideada para manipular documentos basados en información.
+		\item Componente fuerte en manipulación del \emph{DOM} de un sitio web.
+		\item Ideal para generar \highlightbf{herramientas interactivas} 
+	\end{itemize}
+\end{tframe}
+
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Visión Global del Lattice}}
+	\\
+	\includegraphics<1>[width=0.7\textwidth]{images/results_1.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Selector de nivel}}
+	\\
+	\includegraphics<1>[width=0.7\textwidth]{images/results_3.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{\emph{Preview} del Concepto Formal}}
+	\\
+	\includegraphics<1>[width=0.7\textwidth]{images/results_4.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Detalle del Concepto Formal}}
+	\\
+	\includegraphics<1>[width=0.7\textwidth]{images/results_6.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Detalle del Concepto Formal}}
+	\\
+	\includegraphics<1>[width=0.4\textwidth]{images/results_7.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Detalle del Concepto Formal}}
+	\\
+	\includegraphics<1>[width=0.4\textwidth]{images/results_8.png}
+\end{frame}
+
+\begin{frame}[c]{Resultados}
+	\centering
+	\large{\highlightbf{Detalle del Concepto Formal}}
+	\\
+	\includegraphics<1>[width=1\textwidth]{images/results_9.png}
+\end{frame}
+
+\begin{tframe}{Resultados}
+	\centering
+	\large{\highlightbf{Selector de parámetro \emph{minsupp}}}
+	\\
+	\includegraphics<1>[width=1\textwidth]{images/results_10.png}
+\end{tframe}
+
+\begin{tframe}{Conclusiones}	
+	\begin{enumerate}
+		\item Problema de la \highlightbf{dimensionalidad}.
+		\item Fuerte relación entre las técnicas utilizadas.
+		\item Librerías gráficas flexibles entregando al usuario una gran capacidad de interactuar / navegar.
+		\item Resumen visual, interactivo y navegable de una gran colección de datos.
+	\end{enumerate}
+\end{tframe}
+
+\begin{tframe}{Trabajo Futuro}
+	\begin{enumerate}
+		\item Extender este trabajo para analizar las \highlightbf{redes sociales} que forman los autores / consumidores en torno a los tópicos descubiertos.
+		\item Extender el análisis para incluir un \highlightbf{análisis de sentimientos}.
+		\item Crear componente para la tarea de la \highlightbf{recolección} de datos.
+		\item Monitoreo de redes sociales.
+		\item Alertas tempranas de eventos específicos.
+		\item Muchas otras aplicaciones$\dots$
+	\end{enumerate}
+\end{tframe}
+
+
+
